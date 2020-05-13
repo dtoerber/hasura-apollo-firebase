@@ -1,0 +1,13 @@
+<h1>Watch Query</h1>
+<ul>
+  <li *ngFor="let todo of todosService.todos">
+    Title: {{ todo.title }} | Status: {{ todo.status }}
+  </li>
+</ul>
+
+<!-- <h1>Subscription</h1>
+<ul>
+  <li *ngFor="let todo of todosService.todos$() | async">
+    Title: {{ todo.title }} | Status: {{ todo.status }}
+  </li>
+</ul> -->

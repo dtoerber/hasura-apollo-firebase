@@ -1,0 +1,10 @@
+<div *ngIf="auth.authenticated$ | async">
+  You are logged in.<br />
+  <button mat-raised-button color="primary" (click)="getToken()">
+    Get Token
+  </button>
+  <div *ngIf="token">{{ token }}</div>
+</div>
+<div *ngIf="!(auth.authenticated$ | async)">
+  You are NOT logged in.
+</div>
