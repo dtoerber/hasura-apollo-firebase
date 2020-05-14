@@ -11,7 +11,7 @@ import { TodosModule } from './todos/todos.module';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './users/components';
 import { HomeComponent } from './home/home.component';
 
 import { GraphQLOrigModule } from './graphql-orig/graphql-orig.module';

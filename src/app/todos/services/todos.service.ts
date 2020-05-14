@@ -20,11 +20,21 @@ export const query = gql`
   }
 `;
 
+export const subscription = gql`
+  subscription ListTodos {
+    todos {
+      id
+      title
+      status
+      complete
+    }
+  }
+`;
+
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
-  todos: Todo[];
   todos$: Observable<Todo[]> = this.apollo
     .watchQuery<any>({ query })
     .valueChanges.pipe(
@@ -32,8 +42,14 @@ export class TodosService {
       map((response) => response.data.todos)
     );
 
-  constructor(private apollo: Apollo) {
-    // this.apollo .watchQuery<any>({ query }) .valueChanges.pipe( tap((res) => console.log(res)), map((response) => response.data.todos) );
-    // .subscribe((todos) => (this.todos = todos));
+  constructor(private apollo: Apollo) {}
+
+  todosList$(): Observable<any> {
+    return this.apollo
+      .subscribe<any>({ query: subscription })
+      .pipe(
+        tap((res) => console.log(res)),
+        map((response) => response.data.todos)
+      );
   }
 }

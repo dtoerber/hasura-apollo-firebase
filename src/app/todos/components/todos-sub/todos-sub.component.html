@@ -1,1 +1,6 @@
-<p>todos-sub works!</p>
+<h1>Subscription</h1>
+<ul>
+  <li *ngFor="let todo of todosService.todosList$() | async">
+    Title: {{ todo.title }} | Status: {{ todo.status }}
+  </li>
+</ul>
