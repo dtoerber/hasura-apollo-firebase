@@ -9,9 +9,12 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="home">Home</a>
-      <a mat-list-item routerLink="users">Firebase</a>
-      <a mat-list-item routerLink="todos">Hasura</a>
+      <a *ngIf="auth.authenticated$ | async" mat-list-item routerLink="users"
+        >Firestore</a
+      >
+      <a *ngIf="auth.authenticated$ | async" mat-list-item routerLink="todos"
+        >Hasura</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,7 +30,7 @@
       <span>Hasura Apollo Firebase</span>
       <span class="fill-remaining-space"></span>
       <div *ngIf="!(auth.authenticated$ | async)">
-        <button mat-raised-button color="primary" (click)="login()">
+        <button mat-raised-button color="primary" routerLink="login">
           LOGIN
         </button>
       </div>

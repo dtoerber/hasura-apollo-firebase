@@ -12,14 +12,14 @@ import { TodosModule } from './todos/todos.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { UsersComponent } from './users/components';
-import { HomeComponent } from './home/home.component';
 
 import { GraphQLModule } from './graphql/graphql.module';
 
 import { environment } from 'src/environments/environment';
+import { LoginComponent } from './auth/components';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, UsersComponent, HomeComponent],
+  declarations: [AppComponent, NavComponent, UsersComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

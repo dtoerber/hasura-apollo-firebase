@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -19,12 +20,14 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public auth: AuthService
+    public auth: AuthService,
+    private router: Router
   ) {}
-  login() {
-    this.auth.login();
-  }
+
   logout() {
+    // TODO - remove setTimeout and address root cause of auth getting out of sync
+    // Let firebase complete sign out before navigating to login page.
+    setTimeout((_) => this.router.navigate(['login']), 100);
     this.auth.logout();
   }
 }
