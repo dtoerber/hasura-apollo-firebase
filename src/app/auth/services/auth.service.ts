@@ -45,9 +45,7 @@ export class AuthService {
     });
   }
 
-  login() {
-    const email = 'test@test.com';
-    const password = 'password';
+  login(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password);
   }
   logout() {

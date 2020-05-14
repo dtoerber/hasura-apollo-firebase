@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from './material/material.module';
 import { TodosModule } from './todos/todos.module';
@@ -24,6 +25,7 @@ import { LoginComponent } from './auth/components';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
