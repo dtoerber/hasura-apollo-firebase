@@ -9,5 +9,7 @@ import { TodosService } from '../../services/todos.service';
 export class TodosSubComponent implements OnInit {
   constructor(public todosService: TodosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todosService.todosList$().subscribe((data) => console.log(data));
+  }
 }

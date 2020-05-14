@@ -4,7 +4,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { environment } from 'src/environments/environment';
-import { split } from 'apollo-link';
+import { split, toPromise } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { getMainDefinition } from 'apollo-utilities';
 import { HttpHeaders, HttpClientModule } from '@angular/common/http';
@@ -36,15 +36,23 @@ export class GraphQLModule {
     wsClient.onError(() => (ws as any).subscriptionClient.close(false, false));
 
     const authContext = setContext(async (_, { headers }) => {
-      let Authorization = '';
-      const user = await afAuth.currentUser;
-      if (user) {
-        Authorization = `Bearer ${await user.getIdToken()}`;
-      }
+      const idToken = await toPromise<any>(afAuth.idTokenResult as any);
+      const Authorization = `Bearer ${idToken.token}`;
       return {
         headers: new HttpHeaders().set('Authorization', Authorization),
       };
     });
+    // const authContext = setContext(async (_, { headers }) => {
+    //   let Authorization = '';
+    //   const user = await afAuth.currentUser;
+    //   console.log(`user`, user);
+    //   if (user) {
+    //     Authorization = `Bearer ${await user.getIdToken()}`;
+    //   }
+    //   return {
+    //     headers: new HttpHeaders().set('Authorization', Authorization),
+    //   };
+    // });
 
     const splitLink = split(
       // split based on operation type
