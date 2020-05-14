@@ -38,8 +38,8 @@ export class TodosService {
   todos$: Observable<Todo[]> = this.apollo
     .watchQuery<any>({ query })
     .valueChanges.pipe(
-      tap((res) => console.log(res)),
-      map((response) => response.data.todos)
+      map((response) => response.data.todos),
+      tap((res) => console.log(`Subscription`, res))
     );
 
   constructor(private apollo: Apollo) {}
@@ -48,8 +48,8 @@ export class TodosService {
     return this.apollo
       .subscribe<any>({ query: subscription })
       .pipe(
-        tap((res) => console.log(res)),
-        map((response) => response.data.todos)
+        map((response) => response.data.todos),
+        tap((res) => console.log(`Watch:`, res))
       );
   }
 }

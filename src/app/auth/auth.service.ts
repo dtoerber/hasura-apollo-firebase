@@ -25,7 +25,7 @@ export class AuthService {
           .pipe(
             first(),
             tap((token) => {
-              console.log(token.token);
+              // console.log(token.token);
               const expires =
                 new Date(token.expirationTime).toLocaleDateString() +
                 ' ' +
