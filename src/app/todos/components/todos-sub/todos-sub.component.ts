@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../../services/todos.service';
+import { Todo } from 'src/app/models';
 
 @Component({
   selector: 'app-todos-sub',
@@ -7,9 +8,11 @@ import { TodosService } from '../../services/todos.service';
   styleUrls: ['./todos-sub.component.scss'],
 })
 export class TodosSubComponent implements OnInit {
+  todos: Todo[];
+
   constructor(public todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.todosService.todosList$().subscribe((data) => console.log(data));
+    this.todosService.todosList$().subscribe((data) => (this.todos = data));
   }
 }
