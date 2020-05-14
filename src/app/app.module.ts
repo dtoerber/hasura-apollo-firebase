@@ -14,7 +14,6 @@ import { NavComponent } from './nav/nav.component';
 import { UsersComponent } from './users/components';
 import { HomeComponent } from './home/home.component';
 
-import { GraphQLOrigModule } from './graphql-orig/graphql-orig.module';
 import { GraphQLModule } from './graphql/graphql.module';
 
 import { environment } from 'src/environments/environment';
@@ -29,7 +28,6 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     GraphQLModule,
-    // GraphQLOrigModule,
     HttpClientModule,
     TodosModule,
   ],
