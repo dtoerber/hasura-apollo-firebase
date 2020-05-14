@@ -9,8 +9,13 @@ import { Todo } from '../../../models';
 })
 export class TodosComponent implements OnInit {
   todos: Observable<Todo[]>;
+  todosSubscription: Todo[];
 
   constructor(public todosService: TodosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todosService
+      .todosList$()
+      .subscribe((data) => (this.todosSubscription = data));
+  }
 }
