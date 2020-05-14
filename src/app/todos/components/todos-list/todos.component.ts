@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TodosService } from './services/todos.service';
-import { Todo } from '../models';
+import { TodosService } from '../../services/todos.service';
+import { Todo } from '../../../models';
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',

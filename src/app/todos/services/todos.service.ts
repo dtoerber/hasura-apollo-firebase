@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map, tap, catchError, filter } from 'rxjs/operators';
 import { Apollo, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Todo } from '../../models';
@@ -25,18 +25,15 @@ export const query = gql`
 })
 export class TodosService {
   todos: Todo[];
+  todos$: Observable<Todo[]> = this.apollo
+    .watchQuery<any>({ query })
+    .valueChanges.pipe(
+      tap((res) => console.log(res)),
+      map((response) => response.data.todos)
+    );
 
   constructor(private apollo: Apollo) {
-    this.apollo
-      .watchQuery<any>({ query })
-      .valueChanges.pipe(
-        tap((res) => console.log(res)),
-        map((response) => response.data.todos),
-        catchError((err) => {
-          console.log(err);
-          return of(err);
-        })
-      )
-      .subscribe((todos) => (this.todos = todos));
+    // this.apollo .watchQuery<any>({ query }) .valueChanges.pipe( tap((res) => console.log(res)), map((response) => response.data.todos) );
+    // .subscribe((todos) => (this.todos = todos));
   }
 }
